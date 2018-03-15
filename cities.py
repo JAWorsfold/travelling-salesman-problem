@@ -1,5 +1,6 @@
 # Jworsf01 - Joseph Worsfold
 # Assignment four
+from earth_distance import distance
 
 
 def read_cities(file_name):
@@ -28,8 +29,9 @@ def print_cities(road_map):
     Print only one or two digits after the decimal point.
     """
     for i in range(len(road_map)):
-        print("City: %s, Latitude: %.2f, Longitude: %.2f." %
-              (road_map[i][1], float(road_map[i][2]), float(road_map[i][3])))
+        print("City: %s, %s, Latitude: %.2f, Longitude: %.2f." %
+              (road_map[i][1], road_map[i][0], float(road_map[i][2]),
+               float(road_map[i][3])))
 
 
 def compute_total_distance(road_map):
@@ -82,7 +84,17 @@ def print_map(road_map):
     their connections, along with the cost for each connection
     and the total cost.
     """
-    pass
+    total_distance = 0.0
+    for i in range(len(road_map)):
+        d = (distance(float(road_map[i][2]), float(road_map[i][3]),
+                      float(road_map[(i + 1) % len(road_map)][2]),
+                      float(road_map[(i + 1) % len(road_map)][3])))
+        total_distance += d
+        print("%s, %s -> %s, %s = distance %f. :== Total distance = %f."
+              % (road_map[i][1], road_map[i][0],
+                 road_map[(i + 1) % len(road_map)][1],
+                 road_map[(i + 1) % len(road_map)][0],
+                 d, total_distance))
 
 
 def main():
@@ -91,7 +103,8 @@ def main():
     cycle and prints it out.
     """
     road_map = read_cities("city-data.txt")
-    print_cities(road_map)
+    # print_cities(road_map)
+    print_map(road_map)
 
 
 if __name__ == "__main__":
