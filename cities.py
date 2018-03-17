@@ -20,6 +20,7 @@ def read_cities(file_name):
     while line != "":
         road_map.append(tuple(line.split('\t')))
         line = infile.readline()
+    infile.close()
     return road_map
 
 
@@ -58,7 +59,10 @@ def swap_adjacent_cities(road_map, index):
 
         (new_road_map, new_total_distance)
     """
-    pass
+    new_road_map = [i for i in road_map]
+    new_road_map[index], new_road_map[(index + 1) % len(new_road_map)] = (
+        new_road_map[(index + 1) % len(new_road_map)], new_road_map[index])
+    return (new_road_map, compute_total_distance(new_road_map))
 
 
 def swap_cities(road_map, index1, index2):
