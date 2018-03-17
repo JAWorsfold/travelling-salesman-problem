@@ -81,4 +81,9 @@ def test_swap_cities_three():
 
 
 def test_find_best_cycle():
-    pass
+    best_road_map1 = find_best_cycle(road_map1)
+    assert compute_total_distance(best_road_map1) == 86.83358165735886
+    best_road_map2 = find_best_cycle(road_map2)
+    assert compute_total_distance(best_road_map2) == 585.7342975569294
+    best_road_map3 = find_best_cycle(road_map3)
+    assert compute_total_distance(best_road_map3) == 9234.89789867314

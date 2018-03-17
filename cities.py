@@ -88,7 +88,19 @@ def find_best_cycle(road_map):
     try `10000` swaps, and each time keep the best cycle found so far.
     After `10000` swaps, return the best cycle found so far.
     """
-    pass
+    swaps = 0
+    while swaps < 10000:
+        for i in range(len(road_map)):
+            swaps += 1
+            new_road_map, new_distance = swap_adjacent_cities(road_map, i)
+            if new_distance < compute_total_distance(road_map):
+                road_map = new_road_map
+            for j in range(len(road_map)):
+                swaps += 1
+                new_road_map, new_distance = swap_cities(road_map, i, j)
+                if new_distance < compute_total_distance(road_map):
+                    road_map = new_road_map
+    return road_map
 
 
 def print_map(road_map):
