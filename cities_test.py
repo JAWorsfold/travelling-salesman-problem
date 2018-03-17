@@ -59,8 +59,25 @@ def test_swap_adjacent_cities_three():
     assert distance == 13003.742428600068
 
 
-def test_swap_cities():
-    pass
+def test_swap_cities_one():
+    map, distance = swap_cities(road_map1, 0, 2)
+    assert distance == 86.83358165735888
+    map, distance = swap_cities(road_map1, 1, 3)
+    assert distance == 86.83358165735886
+
+
+def test_swap_cities_two():
+    map, distance = swap_cities(road_map2, 0, 2)
+    assert distance == 585.7342975569294
+    map, distance = swap_cities(road_map2, 1, 3)
+    assert distance == 585.7342975569294
+
+
+def test_swap_cities_three():
+    map, distance = swap_cities(road_map3, 0, 2)
+    assert distance == 9234.89789867314
+    map, distance = swap_cities(road_map3, 1, 3)
+    assert distance == 9234.89789867314
 
 
 def test_find_best_cycle():
