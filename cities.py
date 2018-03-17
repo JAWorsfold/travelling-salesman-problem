@@ -89,7 +89,7 @@ def print_map(road_map):
         d = (distance(float(road_map[i][2]), float(road_map[i][3]),
                       float(road_map[(i + 1) % len(road_map)][2]),
                       float(road_map[(i + 1) % len(road_map)][3])))
-        total_distance += d
+        total_distance += d  # replace with total distance function later
         print("%s, %s -> %s, %s = distance %f. :== Total distance = %f."
               % (road_map[i][1], road_map[i][0],
                  road_map[(i + 1) % len(road_map)][1],

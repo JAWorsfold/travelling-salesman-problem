@@ -1,5 +1,6 @@
 from math import *
 
+
 def distance(lat1degrees, long1degrees, lat2degrees, long2degrees):
     earth_radius = 3956  # miles
     lat1 = radians(lat1degrees)
