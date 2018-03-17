@@ -30,7 +30,7 @@ def print_cities(road_map):
     Print only one or two digits after the decimal point.
     """
     for i in range(len(road_map)):
-        print("City: %s, %s, Latitude: %.2f, Longitude: %.2f." %
+        print("City: %s, %s | Latitude: %.2f | Longitude: %.2f." %
               (road_map[i][1], road_map[i][0], float(road_map[i][2]),
                float(road_map[i][3])))
 
@@ -94,12 +94,12 @@ def find_best_cycle(road_map):
             swaps += 1
             new_road_map, new_distance = swap_adjacent_cities(road_map, i)
             if new_distance < compute_total_distance(road_map):
-                road_map = new_road_map
+                road_map = [i for i in new_road_map]
             for j in range(len(road_map)):
                 swaps += 1
                 new_road_map, new_distance = swap_cities(road_map, i, j)
                 if new_distance < compute_total_distance(road_map):
-                    road_map = new_road_map
+                    road_map = [i for i in new_road_map]
     return road_map
 
 
@@ -109,17 +109,16 @@ def print_map(road_map):
     their connections, along with the cost for each connection
     and the total cost.
     """
-    total_distance = 0.0
     for i in range(len(road_map)):
         d = (distance(float(road_map[i][2]), float(road_map[i][3]),
                       float(road_map[(i + 1) % len(road_map)][2]),
                       float(road_map[(i + 1) % len(road_map)][3])))
-        total_distance += d  # replace with total distance function later
-        print("%s, %s -> %s, %s = distance %f. :== Total distance = %f."
+        print("%s, %s -> %s, %s :== %f miles."
               % (road_map[i][1], road_map[i][0],
                  road_map[(i + 1) % len(road_map)][1],
-                 road_map[(i + 1) % len(road_map)][0],
-                 d, total_distance))
+                 road_map[(i + 1) % len(road_map)][0], d))
+    print("The total overall distance is %f miles." % (
+          compute_total_distance(road_map)))
 
 
 def main():
@@ -128,8 +127,14 @@ def main():
     cycle and prints it out.
     """
     road_map = read_cities("city-data.txt")
-    # print_cities(road_map)
+    print_cities(road_map)
+    road_map = find_best_cycle(road_map)
     print_map(road_map)
+    # 25255.536497 after 5100 swaps
+    # 58803.517736 before swaps
+    # 24438.600243 after 10200 swaps
+    # 24438.600243 after 20400 swaps
+    # 24438.600243 after 102000 swaps
 
 
 if __name__ == "__main__":
